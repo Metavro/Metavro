@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Metavro — We build websites people remember.</title>
+<meta name="description" content="Metavro creates custom digital experiences that make businesses look established, professional and impossible to ignore.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="stylesheet" href="shared.css">
+<style>
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  background: transparent;
+  position: relative;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  padding-top: 68px;
+}
+.hero-noise {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.025; pointer-events: none;
+}
+.hero-gradient {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 70% 60% at 75% 40%, rgba(124,92,252,0.22) 0%, transparent 65%),
+              radial-gradient(ellipse 50% 50% at 20% 80%, rgba(59,91,219,0.14) 0%, transparent 60%);
+}
+.hero-grid {
+  position: absolute; inset: 0; pointer-events: none;
+  background-image:
+    linear-gradient(rgba(124,92,252,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(124,92,252,0.05) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+}
+.hero-sphere {
+  position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+  width: min(520px, 48vw); height: min(520px, 48vw);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(157,127,255,0.35), rgba(124,92,252,0.18) 40%, transparent 70%),
+              radial-gradient(circle at 65% 65%, rgba(59,91,219,0.15), transparent 60%);
+  border: 1px solid rgba(124,92,252,0.15);
+  box-shadow: 0 0 120px rgba(124,92,252,0.18), inset 0 0 60px rgba(124,92,252,0.08);
+  animation: float 7s ease-in-out infinite;
+  pointer-events: none;
+}
+.hero-sphere::before {
+  content: '';
+  position: absolute; inset: 15%;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.06);
+  background: radial-gradient(circle at 40% 30%, rgba(255,255,255,0.06), transparent 60%);
+}
+.hero-sphere::after {
+  content: '';
+  position: absolute; top: 10%; left: 25%; width: 30%; height: 12%;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  filter: blur(8px);
+  transform: rotate(-20deg);
+}
+@keyframes float {
+  0%, 100% { transform: translateY(-50%) translateY(0px); }
+  50% { transform: translateY(-50%) translateY(-18px); }
+}
+.hero-inner {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 1200px; margin: 0 auto;
+  padding: 100px 28px;
+}
+.hero-content { max-width: 620px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(124,92,252,0.1); border: 1px solid rgba(124,92,252,0.22);
+  color: var(--violet2); font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 6px 14px; border-radius: 100px; margin-bottom: 32px;
+}
+.hero-badge-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--violet2); flex-shrink: 0; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100% { opacity:1; transform:scale(1); } 50% { opacity:0.4; transform:scale(0.7); } }
+.hero h1 { color: var(--offwhite); margin-bottom: 24px; }
+.hero h1 em { font-style: normal; color: var(--violet2); }
+.hero-sub {
+  color: var(--text-soft); font-size: 1.0625rem; line-height: 1.75;
+  margin-bottom: 40px; max-width: 480px;
+}
+.hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-stats {
+  margin-top: 72px;
+  display: flex; gap: 48px; flex-wrap: wrap;
+  padding-top: 40px; border-top: 1px solid var(--glass-border);
+}
+.stat-num { font-size: 2rem; font-weight: 800; color: var(--offwhite); letter-spacing: -0.04em; line-height: 1; }
+.stat-label { font-size: 0.8125rem; color: var(--text-muted); margin-top: 4px; font-weight: 500; }
+
+/* ── SERVICES (orbital) ── */
+.services-section {
+  background: rgba(19,22,43,0.42);
+  position: relative; overflow: hidden;
+}
+.services-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(124,92,252,0.07), transparent 70%);
+  pointer-events: none;
+}
+.orbital-wrap {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  min-height: 600px;
+}
+@keyframes floatCore {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+.orbital-core {
+  position: relative; z-index: 3;
+  width: 200px; height: 200px; border-radius: 50%;
+  background: radial-gradient(circle at 40% 35%, rgba(157,127,255,0.3), rgba(124,92,252,0.15) 50%, transparent 80%);
+  border: 1px solid rgba(124,92,252,0.25);
+  box-shadow: 0 0 60px rgba(124,92,252,0.2), inset 0 0 30px rgba(124,92,252,0.08);
+  display: flex; align-items: center; justify-content: center; text-align: center; padding: 24px;
+  animation: floatCore 8s ease-in-out infinite;
+}
+.orbital-core-text {
+  font-size: 0.875rem; font-weight: 700; color: rgba(255,255,255,0.85); line-height: 1.4;
+}
+.orbital-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px dashed rgba(124,92,252,0.15);
+  animation: spin linear infinite;
+}
+.ring-1 { width: 340px; height: 340px; animation-duration: 30s; }
+.ring-2 { width: 500px; height: 500px; animation-duration: 50s; animation-direction: reverse; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+.orbital-nodes {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.orbital-node {
+  position: absolute;
+  transition: var(--t);
+}
+.orbital-node-btn {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;
+  transition: var(--t);
+}
+.orbital-node-btn:hover .node-dot { transform: scale(1.2); box-shadow: 0 0 20px rgba(124,92,252,0.5); }
+.orbital-node-btn:hover .node-label { color: var(--offwhite); }
+.orbital-node-btn:hover .node-desc { opacity: 1; transform: translateY(0); }
+.node-dot {
+  width: 52px; height: 52px; border-radius: 50%;
+  background: var(--glass-bg); border: 1px solid rgba(124,92,252,0.3);
+  display: flex; align-items: center; justify-content: center;
+  backdrop-filter: blur(12px); transition: var(--t);
+  box-shadow: 0 0 20px rgba(124,92,252,0.1);
+}
+.node-dot svg { color: var(--violet2); }
+.node-label { font-size: 0.875rem; font-weight: 700; color: var(--text-soft); white-space: nowrap; transition: var(--t); }
+.node-desc {
+  font-size: 0.75rem; color: var(--text-muted); max-width: 120px; text-align: center;
+  opacity: 0; transform: translateY(4px); transition: var(--t); line-height: 1.45;
+}
+/* positions */
+.node-top    { top: 10%;  left: 50%; transform: translateX(-50%); }
+.node-right  { right: 8%; top: 50%; transform: translateY(-50%); }
+.node-bottom { bottom: 10%; left: 50%; transform: translateX(-50%); }
+.node-left   { left: 8%;  top: 50%; transform: translateY(-50%); }
+
+/* mobile orbital fallback */
+.orbital-mobile { display: none; }
+.svc-pill {
+  display: flex; align-items: center; gap: 16px;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: 16px; padding: 20px 24px; transition: var(--t);
+}
+.svc-pill:hover { border-color: rgba(124,92,252,0.35); background: rgba(124,92,252,0.06); }
+.svc-pill-icon {
+  width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+  background: var(--violet-dim); border: 1px solid rgba(124,92,252,0.2);
+  display: flex; align-items: center; justify-content: center; color: var(--violet2);
+}
+.svc-pill-name { font-size: 1rem; font-weight: 700; color: var(--offwhite); }
+.svc-pill-desc { font-size: 0.8125rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ── PROCESS ── */
+.process-section { background: var(--cream); }
+.process-header .section-title { color: var(--ink); }
+.process-header .section-sub { color: #6B7280; }
+.process-header .eyebrow { color: var(--violet); }
+.process-header .eyebrow::before { background: var(--violet); }
+.process-track {
+  position: relative; margin-top: 72px;
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0;
+}
+.process-line {
+  position: absolute; top: 28px; left: 10%; right: 10%; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--violet), var(--violet2), var(--violet), transparent);
+  opacity: 0.25; pointer-events: none;
+}
+.process-step {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  padding: 0 12px; position: relative; z-index: 1;
+}
+.process-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--ink); color: var(--violet2);
+  border: 1.5px solid rgba(124,92,252,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 800; letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  transition: var(--t); cursor: default;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+.process-step:hover .process-num {
+  background: var(--violet); color: var(--offwhite);
+  box-shadow: 0 0 24px rgba(124,92,252,0.45);
+  border-color: var(--violet);
+  transform: scale(1.1);
+}
+.process-name { font-size: 0.9375rem; font-weight: 700; color: var(--ink); margin-bottom: 8px; }
+.process-desc { font-size: 0.8125rem; color: #6B7280; line-height: 1.55; }
+
+/* ── WHY METAVRO (pillars) ── */
+.pillars-section { background: rgba(26,31,58,0.40); }
+.pillars-grid {
+  margin-top: 64px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.pillar {
+  position: relative; overflow: hidden;
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg); padding: 40px 28px 32px;
+  cursor: default; transition: var(--t); text-align: center;
+}
+.pillar::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, transparent, var(--violet), transparent);
+  opacity: 0; transition: var(--t);
+}
+.pillar:hover {
+  border-color: rgba(124,92,252,0.3); background: rgba(124,92,252,0.06);
+  transform: translateY(-4px); box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+}
+.pillar:hover::before { opacity: 1; }
+.pillar-num {
+  font-size: 3rem; font-weight: 800; letter-spacing: -0.05em;
+  color: var(--violet-dim); line-height: 1; margin-bottom: 16px;
+  background: linear-gradient(135deg, var(--violet), var(--violet2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  transition: var(--t);
+}
+.pillar-title { font-size: 1.125rem; font-weight: 700; color: var(--offwhite); margin-bottom: 14px; }
+.pillar-body { font-size: 0.875rem; color: var(--text-muted); line-height: 1.65; }
+
+/* ── TESTIMONIALS ── */
+.testi-section {
+  background: rgba(19,22,43,0.42); position: relative; overflow: hidden;
+}
+.testi-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 70% at 80% 50%, rgba(124,92,252,0.08), transparent 65%);
+  pointer-events: none;
+}
+.testi-marquee-wrap { margin-top: 56px; overflow: hidden; position: relative; }
+.testi-marquee-wrap::before,
+.testi-marquee-wrap::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 160px; z-index: 2;
+}
+.testi-marquee-wrap::before { left: 0; background: linear-gradient(90deg, var(--ink2), transparent); }
+.testi-marquee-wrap::after  { right: 0; background: linear-gradient(-90deg, var(--ink2), transparent); }
+.testi-marquee {
+  display: flex; gap: 20px;
+  animation: marquee 32s linear infinite;
+  width: max-content;
+}
+.testi-marquee:hover { animation-play-state: paused; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+.testi-card {
+  background: var(--glass-bg); border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg); padding: 28px 32px;
+  width: 340px; flex-shrink: 0; transition: var(--t);
+}
+.testi-card:hover { border-color: rgba(124,92,252,0.25); }
+.testi-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+.testi-stars span { color: #FFB83F; font-size: 0.875rem; }
+.testi-text { font-size: 0.9375rem; color: var(--text-soft); line-height: 1.65; margin-bottom: 20px; font-style: italic; }
+.testi-author { display: flex; align-items: center; gap: 12px; }
+.testi-avatar {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--violet), #B490FF);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.8rem; font-weight: 800; color: var(--offwhite); flex-shrink: 0;
+}
+.testi-name { font-size: 0.875rem; font-weight: 700; color: var(--offwhite); }
+.testi-role { font-size: 0.75rem; color: var(--text-muted); margin-top: 2px; }
+
+/* ── CTA ── */
+.cta-section {
+  background: rgba(7,8,15,0.5);
+  position: relative; overflow: hidden; text-align: center;
+  padding: 160px 0;
+}
+.cta-bg {
+  position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 60% 80% at 50% 50%, rgba(124,92,252,0.18), transparent 70%);
+}
+.cta-ring {
+  position: absolute; border-radius: 50%;
+  border: 1px solid rgba(124,92,252,0.08);
+  top: 50%; left: 50%; transform: translate(-50%,-50%);
+}
+.cta-ring-1 { width: 400px; height: 400px; }
+.cta-ring-2 { width: 650px; height: 650px; }
+.cta-ring-3 { width: 900px; height: 900px; }
+.cta-inner { position: relative; z-index: 2; }
+.cta-inner h2 { color: var(--offwhite); font-size: clamp(2.2rem, 5vw, 4rem); letter-spacing: -0.03em; margin-bottom: 20px; }
+.cta-inner h2 em { font-style: normal; color: var(--violet2); }
+.cta-sub { color: var(--text-muted); font-size: 1.0625rem; margin-bottom: 44px; max-width: 440px; margin-left: auto; margin-right: auto; }
+.cta-actions { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .orbital-wrap { display: none; }
+  .orbital-mobile { display: flex; flex-direction: column; gap: 12px; margin-top: 48px; }
+  .hero-sphere { display: none; }
+  .process-track { grid-template-columns: 1fr; gap: 40px; }
+  .process-line { display: none; }
+  .process-step { flex-direction: row; text-align: left; gap: 20px; align-items: flex-start; }
+  .process-num { margin-bottom: 0; flex-shrink: 0; }
+  .pillars-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .hero-stats { gap: 32px; }
+  .pillars-grid { grid-template-columns: 1fr; }
+  .cta-ring-2, .cta-ring-3 { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav-header" id="mainNav">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo">
+      <div class="logo-mark"><img src="assets/logo.png" alt="Metavro logo"></div>
+      <span class="logo-text">Metavro</span>
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="services.html" class="nav-link">Services</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+      <a href="contact.html" class="btn-nav">Let's Talk</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-gradient"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-sphere"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <span class="hero-badge-dot"></span>
+        Est. 2026 &nbsp;·&nbsp; Digital Studio
+      </div>
+      <h1>We build websites<br><em>people remember.</em></h1>
+      <p class="hero-sub">Custom digital experiences that make businesses look established, professional and impossible to ignore.</p>
+      <div class="hero-actions">
+        <a href="services.html" class="btn btn-primary">View Our Work
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="contact.html" class="btn btn-ghost">Let's Build Yours</a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Custom built</div>
+        </div>
+        <div>
+          <div class="stat-num">2026</div>
+          <div class="stat-label">Established</div>
+        </div>
+        <div>
+          <div class="stat-num">Fast</div>
+          <div class="stat-label">Turnaround</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section section">
+  <div class="container">
+    <div class="text-center">
+      <div class="eyebrow">What We Do</div>
+      <h2 class="text-white">Everything your business<br>needs online.</h2>
+    </div>
+    <!-- Desktop orbital -->
+    <div class="orbital-wrap">
+      <div class="orbital-ring ring-1"></div>
+      <div class="orbital-ring ring-2"></div>
+      <div class="orbital-core">
+        <span class="orbital-core-text">Your business, elevated.</span>
+      </div>
+      <div class="orbital-nodes">
+        <!-- Top -->
+        <div class="orbital-node node-top">
+          <div class="orbital-node-btn">
+            <div class="node-dot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg>
+            </div>
+            <span class="node-label">Website Design</span>
+            <span class="node-desc">Bespoke, conversion-focused websites.</span>
+          </div>
+        </div>
+        <!-- Right -->
+        <div class="orbital-node node-right">
+          <div class="orbital-node-btn">
+            <div class="node-dot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            </div>
+            <span class="node-label">WordPress</span>
+            <span class="node-desc">Powerful, easy-to-manage sites.</span>
+          </div>
+        </div>
+        <!-- Bottom -->
+        <div class="orbital-node node-bottom">
+          <div class="orbital-node-btn">
+            <div class="node-dot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg>
+            </div>
+            <span class="node-label">Landing Pages</span>
+            <span class="node-desc">High-converting single pages.</span>
+          </div>
+        </div>
+        <!-- Left -->
+        <div class="orbital-node node-left">
+          <div class="orbital-node-btn">
+            <div class="node-dot">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span class="node-label">Management</span>
+            <span class="node-desc">Ongoing care & optimization.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Mobile fallback -->
+    <div class="orbital-mobile">
+      <div class="svc-pill">
+        <div class="svc-pill-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/></svg></div>
+        <div><div class="svc-pill-name">Website Design</div><div class="svc-pill-desc">Bespoke, conversion-focused websites.</div></div>
+      </div>
+      <div class="svc-pill">
+        <div class="svc-pill-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+        <div><div class="svc-pill-name">WordPress</div><div class="svc-pill-desc">Powerful, easy-to-manage sites.</div></div>
+      </div>
+      <div class="svc-pill">
+        <div class="svc-pill-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V9z"/><polyline points="13 2 13 9 20 9"/></svg></div>
+        <div><div class="svc-pill-name">Landing Pages</div><div class="svc-pill-desc">High-converting single pages.</div></div>
+      </div>
+      <div class="svc-pill">
+        <div class="svc-pill-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+        <div><div class="svc-pill-name">Website Management</div><div class="svc-pill-desc">Ongoing care and optimization.</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section section">
+  <div class="container">
+    <div class="text-center process-header">
+      <div class="eyebrow">How It Works</div>
+      <h2 class="section-title">From idea to live in five steps.</h2>
+      <p class="section-sub">A clear, collaborative process so you always know where things stand.</p>
+    </div>
+    <div class="process-track">
+      <div class="process-line"></div>
+      <div class="process-step">
+        <div class="process-num">01</div>
+        <div>
+          <div class="process-name">Discover</div>
+          <div class="process-desc">We learn your business, goals, and audience.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">02</div>
+        <div>
+          <div class="process-name">Design</div>
+          <div class="process-desc">Custom mockups built around your brand.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">03</div>
+        <div>
+          <div class="process-name">Build</div>
+          <div class="process-desc">Pixel-perfect, fast, and responsive.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">04</div>
+        <div>
+          <div class="process-name">Launch</div>
+          <div class="process-desc">We handle every deployment detail.</div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="process-num">05</div>
+        <div>
+          <div class="process-name">Grow</div>
+          <div class="process-desc">Ongoing support to keep you ahead.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY METAVRO -->
+<section class="pillars-section section">
+  <div class="container">
+    <div class="text-center">
+      <div class="eyebrow">Why Metavro</div>
+      <h2 class="text-white">Built different.<br>By design.</h2>
+    </div>
+    <div class="pillars-grid">
+      <div class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-title">Precision</div>
+        <div class="pillar-body">Every pixel is intentional. No templates, no shortcuts, no generic output.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-title">Strategy</div>
+        <div class="pillar-body">Design decisions rooted in how real customers think and behave.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-title">Creativity</div>
+        <div class="pillar-body">Distinctive work that stands apart from every competitor in your space.</div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-title">Growth</div>
+        <div class="pillar-body">Websites built not just to look good but to consistently convert.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testi-section section">
+  <div class="container">
+    <div class="text-center">
+      <div class="eyebrow">What Clients Say</div>
+      <h2 class="text-white">The work speaks.<br>So do our clients.</h2>
+    </div>
+  </div>
+  <div class="testi-marquee-wrap" style="margin-top:56px;">
+    <div class="testi-marquee" id="testiMarquee">
+      <!-- Set 1 -->
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Our new site completely changed how clients perceive us. Bookings went up within the first week."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AR</div>
+          <div><div class="testi-name">Ahmed Raza</div><div class="testi-role">Founder, AR Consultancy</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"I was skeptical about the investment. Three months later it's the best business decision I've made."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SK</div>
+          <div><div class="testi-name">Sara Khan</div><div class="testi-role">Owner, SK Aesthetics</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Professional from day one. The design matched our vision exactly. Clients constantly compliment it."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">OB</div>
+          <div><div class="testi-name">Omar Butt</div><div class="testi-role">Director, OB Legal</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Fast, responsive, and genuinely talented. Our landing page converts at nearly double the old rate."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">FI</div>
+          <div><div class="testi-name">Fatima Iqbal</div><div class="testi-role">CEO, FI Digital</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"They delivered something I couldn't have imagined myself. Exactly what a premium brand deserves."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ZM</div>
+          <div><div class="testi-name">Zain Malik</div><div class="testi-role">Founder, ZM Studios</div></div>
+        </div>
+      </div>
+      <!-- Set 2 (duplicate for seamless loop) -->
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Our new site completely changed how clients perceive us. Bookings went up within the first week."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">AR</div>
+          <div><div class="testi-name">Ahmed Raza</div><div class="testi-role">Founder, AR Consultancy</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"I was skeptical about the investment. Three months later it's the best business decision I've made."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">SK</div>
+          <div><div class="testi-name">Sara Khan</div><div class="testi-role">Owner, SK Aesthetics</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Professional from day one. The design matched our vision exactly. Clients constantly compliment it."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">OB</div>
+          <div><div class="testi-name">Omar Butt</div><div class="testi-role">Director, OB Legal</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"Fast, responsive, and genuinely talented. Our landing page converts at nearly double the old rate."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">FI</div>
+          <div><div class="testi-name">Fatima Iqbal</div><div class="testi-role">CEO, FI Digital</div></div>
+        </div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+        <p class="testi-text">"They delivered something I couldn't have imagined myself. Exactly what a premium brand deserves."</p>
+        <div class="testi-author">
+          <div class="testi-avatar">ZM</div>
+          <div><div class="testi-name">Zain Malik</div><div class="testi-role">Founder, ZM Studios</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="cta-bg"></div>
+  <div class="cta-ring cta-ring-1"></div>
+  <div class="cta-ring cta-ring-2"></div>
+  <div class="cta-ring cta-ring-3"></div>
+  <div class="container cta-inner">
+    <div class="eyebrow" style="justify-content:center;">Start Today</div>
+    <h2>Let's build something<br><em>worth sharing.</em></h2>
+    <p class="cta-sub">The next business people can't stop talking about could be yours.</p>
+    <div class="cta-actions">
+      <a href="contact.html" class="btn btn-primary">Send an Inquiry
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="tel:+923197224442" class="btn btn-ghost">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        Call Us
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="nav-logo" style="margin-bottom:0">
+          <div class="logo-mark"><img src="assets/logo.png" alt="Metavro logo"></div>
+          <span class="logo-text">Metavro</span>
+        </a>
+        <p class="footer-tagline">Custom websites that help businesses grow, convert, and stand out.</p>
+        <div class="footer-contact-list">
+          <a href="tel:+923197224442" class="footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            03197224442
+          </a>
+          <a href="mailto:metavro.main@gmail.com" class="footer-contact-item">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            metavro.main@gmail.com
+          </a>
+        </div>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Navigation</h4>
+        <ul class="footer-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Services</h4>
+        <ul class="footer-links">
+          <li><a href="services.html">Website Design</a></li>
+          <li><a href="services.html">WordPress Development</a></li>
+          <li><a href="services.html">Landing Pages</a></li>
+          <li><a href="services.html">Website Redesigns</a></li>
+          <li><a href="services.html">Website Management</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Get in Touch</h4>
+        <div class="footer-cta-links">
+          <a href="tel:+923197224442" class="footer-action-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            Call Now
+          </a>
+          <a href="mailto:metavro.main@gmail.com" class="footer-action-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            Email Us
+          </a>
+          <a href="https://wa.me/923197224442" target="_blank" rel="noopener" class="footer-action-link">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            WhatsApp
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Metavro. All rights reserved.</p>
+      <p style="color:var(--text-muted);font-size:0.75rem;">Est. 2026 &nbsp;·&nbsp; Pakistan</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 20); }, {passive:true});
+const burger = document.getElementById('hamburger');
+const navLinks = document.getElementById('navLinks');
+burger.addEventListener('click', () => {
+  burger.classList.toggle('open');
+  navLinks.classList.toggle('open');
+});
+navLinks.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => {
+  burger.classList.remove('open');
+  navLinks.classList.remove('open');
+}));
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.style.opacity = '1'; e.target.style.transform = 'translateY(0)'; }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.pillar, .process-step, .svc-pill').forEach(el => {
+  el.style.opacity = '0'; el.style.transform = 'translateY(24px)';
+  el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
